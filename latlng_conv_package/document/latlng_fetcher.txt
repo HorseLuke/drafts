@@ -7,4 +7,7 @@ http://api.amap.com/Javascript/example
 http://api.map.baidu.com/lbsapi/getpoint/index.html
 
 
+wgs84坐标获取：
+请使用http://www.openlayers.org/ 自行构造一个
+（demo：https://github.com/HorseLuke/satellite_map_viewer ）
 
