@@ -1,0 +1,10 @@
+gcj02坐标（高德坐标）获取：
+http://api.amap.com/Javascript/example
+地图工具 -> 单击地图获取地图坐标
+
+
+百度坐标获取：
+http://api.map.baidu.com/lbsapi/getpoint/index.html
+
+
+
