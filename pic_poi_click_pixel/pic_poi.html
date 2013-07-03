@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图像标点测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    
+    <script type="text/javascript" src="public/jquery/jquery-1.9.1.js"></script>	
+	<script type="text/javascript" src="public/app/js/lrn_util.js"></script>	
+    
+<style type="text/css">
+</style>   
+</head>
+
+<body>
+	<div>
+		<p>http://www.cnblogs.com/blodfox777/archive/2009/03/19/1416447.html</p>
+		<p>http://social.msdn.microsoft.com/Forums/zh-CN/3527adf4-c42a-4b15-977f-1d78fbb54597/eventoffsetx-firefox-</p>
+	</div>
+	
+	<div>
+		<img src="xmn_handwriting_map.jpg" id="handwriting_map_area" />
+	</div>
+</body>
+
+<script>
+	$(document).ready(function() {
+    	$("#handwriting_map_area").on('click', function(e){
+		
+			var offsetXY = lrn.util.eventOffset.get(e);
+			
+			/*
+			 * 方法1：直接使用Image载入获取真实宽高
+			 * 对已载入浏览器图片有效；但若没载入，则无效，总返回0
+			 */
+			var OriginImage=new Image();
+			if(OriginImage.src!=e.target.src){
+				OriginImage.src=e.target.src;
+			}
+			if(OriginImage.width == 0 || OriginImage.height == 0){
+				alert('无法获取图像真实宽高');
+				return false;
+			}
+			
+			var click_pixel_x = offsetXY.offsetX * OriginImage.width / e.target.width;
+			var click_pixel_y = offsetXY.offsetY * OriginImage.height / e.target.height;
+			
+			var result =  {"click_pixel_x": click_pixel_x, "click_pixel_y": click_pixel_y};
+			console.log(result);
+			
+			/*
+			 * 方法2：使用Image的onload获取真实宽高
+			 * 对未载入浏览器图片也有效；但使用了回调
+			 */
+			/*
+			var action =  function(OriginImage){
+				var click_pixel_x = offsetXY.offsetX * OriginImage.width / e.target.width;
+				var click_pixel_y = offsetXY.offsetY * OriginImage.height / e.target.height;
+				return {"click_pixel_x": click_pixel_x, "click_pixel_y": click_pixel_y};
+			};
+			
+			lrn.util.img_ori_size.get(e.target.src, action);
+			*/
+			
+		});
+		
+    });
+	
+
+</script>
+  
+</html>
