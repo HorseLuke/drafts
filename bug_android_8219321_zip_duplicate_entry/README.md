@@ -8,12 +8,19 @@
 举例来讲，存在如下apk（apk本质是个zip包），并且存在重复的classes.dex：
 
 duplicate_entry_zip.apk
+
   |-classes.dex
+
   |-classes.dex
+
   |-duplicate_entry_dir
+
   |      |-duplicate_name_file.txt
+
   |      |-duplicate_name_file.txt
+
   |      |-...
+
   |-...
 
 
@@ -28,11 +35,19 @@ duplicate_entry_zip.apk
 ======
 
 参考：
+
 [1]http://bluebox.com/corporate-blog/bluebox-uncovers-android-master-key/
+
 [2]http://www.pingwest.com/android-devices-vulnerable/
+
 [3]http://www.h-online.com/open/news/item/Bluebox-s-Android-masterkey-hole-identified-1913097.html
+
 [4]https://jira.cyanogenmod.org/browse/CYAN-1602
+
 [5]http://stackoverflow.com/questions/3113556/when-creating-a-zip-archive-what-constitutes-a-duplicate-entry（请注意第一个答案追加的Edit和底下的评论）
+
 [6]http://forums.gradle.org/gradle/topics/add_an_option_to_avoid_duplicate_entries_when_creating_a_zip_file
+
 [7]https://gist.github.com/poliva/36b0795ab79ad6f14fd8
+
 [8]http://weibo.com/1779382071/zEKr3fQwJ
