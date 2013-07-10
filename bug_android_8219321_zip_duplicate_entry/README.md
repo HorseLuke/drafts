@@ -48,7 +48,9 @@ duplicate_entry_zip.apk
 其他信息
 ======
 
-目前已有人结合shell，利用python编辑zip的追加模式，写出了一个poc[7]。
+目前已有人结合shell，利用python编辑zip的追加模式，写出了一个python版poc[7]。
+
+（2013-07-10 14:13更新）根据参考[7]，有人写出了更容易使用的Scala版利用[9]。
 
 此处结合ANDROID_8219321已知公开的互联网信息，存档其中的重点步骤：如何构造一个带有重名路径重名文件的zip包。java部分来自参考[4]，只是个demo，python部分来自参考[7]，可以实际使用。
 
@@ -75,3 +77,5 @@ duplicate_entry_zip.apk
 [7]https://gist.github.com/poliva/36b0795ab79ad6f14fd8
 
 [8]http://weibo.com/1779382071/zEKr3fQwJ
+
+[9]https://github.com/Fuzion24/AndroidMasterKeys
