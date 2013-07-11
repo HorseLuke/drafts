@@ -40,7 +40,7 @@ duplicate_entry_zip.apk
 
 安卓在检查apk签名（java代码）的时候，会使用LinkedHashMap.put(ZipEntry.getName(), ZipEntry)保存zip包内的文件路径和入口（ZipEntry）。因此，按照文件的添加顺序正向读取时，如果出现重复路径，那么后一个（后期添加）会覆盖前一个（先期添加），签名检查也就成为检查最后一个（最后添加）路径对应的文件。
 
-但在安装阶段解压缩（C代码）时，则因为查找zip包文件路径时，只要匹配第一个路径就返回结果（见参考[10]，dexZipFindEntry函数中使用while-if-return），故导致最终，只会解压缩出第一个（先期添加）路径对应的文件。
+但在安装阶段解压缩（C代码）时，则因为查找zip包文件路径时，只要匹配第一个路径就返回结果（见参考[10]或者参考[11]，dexZipFindEntry函数中使用while-if-return），故导致最终，只会解压缩出第一个（先期添加）路径对应的文件。
 
 所以攻击者只要想办法，在zip包内的文件记录中，令修改版classes.dex排在原版classes.dex前面，即可同时绕过签名检查并且被优先取出使用，从而造成漏洞。
 
@@ -81,3 +81,5 @@ duplicate_entry_zip.apk
 [9]https://github.com/Fuzion24/AndroidMasterKeys
 
 [10]http://weibo.com/1899360432/zFkanx99a
+
+[11]http://www.kanxue.com/bbs/showthread.php?t=175129
