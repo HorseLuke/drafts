@@ -45,17 +45,41 @@ duplicate_entry_zip.apk
 所以攻击者只要想办法，在zip包内的文件记录中，令修改版classes.dex排在原版classes.dex前面，即可同时绕过签名检查并且被优先取出使用，从而造成漏洞。
 
 
-其他信息
+POC和说明
 ======
 
 目前已有人结合shell，利用python编辑zip的追加模式，写出了一个python版poc[7]。
 
 （2013-07-10 14:13更新）根据参考[7]，有人写出了更容易使用的Scala版利用[9]。
 
+这些POC，均要求将原来apk的所有文件都附加到修改apk内，这是因为这两个poc都假定攻击者使用apktool工具修改和生成修改apk，而apktool在重新打包时，会有可能修改res资源等文件内容，那么安卓在安装检查文件时，如果没有原版文件在前，会有可能出现签名校验失败，从而无法欺骗和安装（adb install -r会显示[INSTALL_PARSE_FAILED_NO_CERTIFICATES]，看logcat会找到类似“W/PackageParser: java.lang.SecurityException: META-INF/MANIFEST.MF has invalid digest for res/layout/xxx.xml in /data/app/xxx-xxxx.tmp”的信息）。
+
+如果仅仅使用smali/baksmali修改classes.dex，那么不需要原来apk的所有文件、仅仅在classes.dex上做文章即可了，以下给出一种手动实践方法：
+
+<pre>
+
+（1）提取原版apk内的classes.dex，并复制一份为classes-ori.dex；
+（2）用baksmali反编译classes.dex，然后修改其中内容；再用smail重新编译为修改版classes.dex
+（3）删掉原版apk内的classes.dex，将修改版classes.dex添加到原版apk内
+（4）用python的zip追加模式，将classes-ori.dex以“classes.dex”路径追加到原版apk
+（5）搞定
+
+</pre>
+
+
+该github说明和其他
+======
+
+另外有关android绕过签名的方法，国内研究出来还有几种绕过方式：
+
+    （1）针对/system/app内应用检查不严格的绕过，但需要root或者root漏洞，比较麻烦[8]。
+	
+    （2）针对java里short类型转int类型的情况、修改zip包的file header相关信息来达到和Bluebox一样的效果，不过有一定限制（@安卓安全小分队:“不是，是原始apk中的dex文件大小不能超过64K......该攻击方式只能攻击包含小于64K的dex文件的apk”），修复方案也和上述提到的漏洞不一样[12]。
+
+
 此处结合ANDROID_8219321已知公开的互联网信息，存档其中的重点步骤：如何构造一个带有重名路径重名文件的zip包。java部分来自参考[4]，只是个demo，python部分来自参考[7]，可以实际使用。
-
-另外有关android绕过签名的方法，国内还有另一种绕过方式，不过只能针对/system/app。[8]
-
+	
+	
 
 参考
 ======
@@ -83,3 +107,6 @@ duplicate_entry_zip.apk
 [10]http://weibo.com/1899360432/zFkanx99a
 
 [11]http://www.kanxue.com/bbs/showthread.php?t=175129
+
+[12]http://blog.sina.com.cn/s/blog_be6dacae0101bksm.html
+
