@@ -265,7 +265,7 @@ class lrn_aop_advice_introduction{
 
 	protected static $loaded = array();
 	
-	protected static $config = array();
+	protected static $match_tree = array();
 	
 	protected static $spl_obj_hash_tree = array();
 	
@@ -306,7 +306,8 @@ class lrn_aop_advice_introduction{
 		$classname = $instance_aop ? $object->___aop_origin_get_name() : get_class($object);
 		
 		$advice_load = self::load($name);
-		$advice_cfg = $advice_load ? self::load_config($classname) : false;
+		$advice_cfg = $advice_load ? self::get_config($name, $classname) : false;
+		
 		//var_export(array('%%%%%%%%%%%%%%%', $name, $advice_load, $classname, $advice_cfg));
 		if(!$advice_load || empty($advice_cfg)){
 			if($instance_aop){
@@ -353,31 +354,21 @@ class lrn_aop_advice_introduction{
 		
 	}	
 	
-	static public function load_config($name){
+	/**
+	 * 查找introduction通知的配置，并且确定是否符合$classname？
+	 */
+	static public function get_config($name, $classname){
 		
-		if(isset(self::$config[$name])){
-			return self::$config[$name];
-		}
-
-		$advice_introduction = lrn_aop_config::get('advice_introduction');
-		$new_config = array();
-		if(!empty($advice_introduction)){
-			foreach($advice_introduction as $row){
-				if(!lrn_aop::conf_str_match($name, $row['class'])){
-					continue;
-				}
-				
-				$new_config[$row['name']] = $row;
-			}
-		}
-		
-		if(empty($new_config)){
-			self::$config[$name] = false;
+		$advice_introduction = lrn_aop_config::get('advice_introduction>'. $name);
+		if(!isset($advice_introduction['class'])){
 			return false;
 		}
-		self::$config[$name] = $new_config;
 		
-		return $new_config;
+		if(!lrn_aop::conf_str_match($classname, $advice_introduction['class'])){
+			return false;
+		}
+		
+		return $advice_introduction;
 		
 	}
 	
