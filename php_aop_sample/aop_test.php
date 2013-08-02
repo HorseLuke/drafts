@@ -271,7 +271,7 @@ class lrn_aop_advice_introduction{
 	
 	/**
 	 * 获取某对象指定的introduction通知
-	 * 如果获取失败且$halt为false（默认），则返回原对象，否则fatal error
+	 * 如果获取失败且$halt为false，则返回原对象，否则fatal error（默认）
 	 * @param string $name introduction通知名称
 	 * @param object $object 要获取的对象
 	 * @param bool $halt 如果获取失败且$halt为false，是否fatal error？默认true
