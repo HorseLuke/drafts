@@ -272,6 +272,7 @@ class lrn_aop_advice_introduction{
 	/**
 	 * 获取某对象指定的introduction通知
 	 * 如果获取失败且$halt为false，则返回原对象，否则fatal error（默认）
+	 * 该方法保证：只要给出相同的$name和$object，均返回同一个对应的introduction通知（“模拟引用”）
 	 * @param string $name introduction通知名称
 	 * @param object $object 要获取的对象
 	 * @param bool $halt 如果获取失败且$halt为false，是否fatal error？默认true
