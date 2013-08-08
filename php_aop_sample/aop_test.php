@@ -247,7 +247,7 @@ class lrn_aop_abstract_aspect{
 	}
 	
 	public function __call($name, $param){
-		if($silent_method){
+		if(true === $this->silent_method){
 			return null;
 		}
 		
