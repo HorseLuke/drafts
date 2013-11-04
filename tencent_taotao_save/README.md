@@ -31,7 +31,7 @@ php cli访问之（必填参数--qqnumber和--cookies）：
 php.exe -f "[taotao_save.php文件实际路径]" -- --qqnumber="[QQ号码]" --cookies="[登录访问http://user.qzone.qq.com/后的cookies]"
 </pre>
 
-（cookies可通过如下方法查看：chrome按F12调出开发者工具，然后选择Network，在登录状态下再刷新http://user.qzone.qq.com/，然后点击第一条Network记录，里面有一个Request Headers，见到cookies部分，直接全部复制即是]）
+（cookies可通过如下方法查看：chrome按F12调出开发者工具，然后选择Network，在登录状态下再刷新http://user.qzone.qq.com/ ，然后点击第一条Network记录，里面有一个Request Headers，见到cookies部分，直接全部复制即是]）
 
 
 其它可用参数：
