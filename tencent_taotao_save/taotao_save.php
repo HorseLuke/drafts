@@ -14,9 +14,8 @@ libxml、mbstring、curl
 
 使用方法：
 
-php.exe -f "[taotao_save.php文件实际路径]" -- --qqnumber="[QQ号码]" --cookies="[登录访问http://user.qzone.qq.com/后的cookies]"
+php.exe -f "[taotao_save.php文件实际路径]" -- --qqnumber="[QQ号码]" --cookies="[登录访问http://user.qzone.qq.com/后的cookies，chrome按F12调出开发者工具，然后选择Network，再刷新http://user.qzone.qq.com/，然后点击第一条，里面有一个Request Headers即是]"
 
-（cookies可通过如下方法查看：chrome按F12调出开发者工具，然后选择Network，在登录状态下再刷新http://user.qzone.qq.com/，然后点击第一条Network记录，里面有一个Request Headers，见到cookies部分，直接全部复制即是]）
 
 其他可用参数：
 
@@ -201,7 +200,7 @@ class project_taotao_controller{
 			file_put_contents($rawdata_save, $data);
 			project_common_cli::output("raw data save to:". $rawdata_save);
 			
-			if(stripos($data, 'error') !== false){
+			if(stripos($data, '</error>') !== false){
 				project_common_cli::output("[BREAK!]{$qqnumber} fetch page {$i} failure. Data Return Error:". $data);
 				break;
 			}
@@ -241,6 +240,7 @@ class project_taotao_controller{
 	}
 	
 	protected function _parse_xml_and_save($data, $qqnumber = 0, $page = 0){
+		$data = iconv('GB2312', 'GB2312//IGNORE', $data);    //http://hi.baidu.com/0998123474/item/ce8c924139602508c01613f6(过滤掉错误字符,防止解析错误)
 		$xml = simplexml_load_string($data);
 		if(!is_object($xml)){
 			return -1;
