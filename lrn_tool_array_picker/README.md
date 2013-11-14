@@ -74,6 +74,6 @@ $result3 = $lrn_tool_array_picker->by_rule(array(), $conds);
 
 更新日志
 ======
-2013/11/14 17:28 更新：
+2013/11/14 17:42 更新：
 
 初始版本

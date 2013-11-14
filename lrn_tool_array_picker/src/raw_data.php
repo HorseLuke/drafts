@@ -1,7 +1,5 @@
 <?php
 
-//数据分析：http://weibo.com/1454872824/Ahsp7ggJW
-
 return array (
   'users' => 
   array (
