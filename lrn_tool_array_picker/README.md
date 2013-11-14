@@ -1,13 +1,73 @@
 [draft]lrn_tool_array_picker
 ======
-[php]提取或排除数组内的数据（array_filter的补充版）
 
-目标：提供一个组件，能用在任意项目的数据交换处（比如api、函数或方法过滤返回），以统一的过滤规则、自由更改并返回数组返回的内容。
-
-
-语言
+ENGLISH DESCRIPTION
 ======
-php
+Exclude or only return specific index value from an array(Supplement of function array_filter).
+
+Goal: By unifying the filter rules, this class can be used in any array-data exchange place, such as api front-end custom data return, or function/method return data filter.
+
+Acknowledge
+======
+@文刀_建州 （http://weibo.com/u/1735154004 ）
+
+
+Usage
+======
+This class provide three methods:
+
+<pre>
+    /**
+     * [ENG]Simple method, only return specific index value from array
+     * @param array $data 
+     * [ENG]Input data
+     * @param array|string $cond 
+     * [ENG]Specific index string or array that would return. If it is string, use comma delimiter between index
+     * @param mixed $not_found_def 
+     * [ENG]What will do if index not exist in array? default is self::IGNORE
+     * @return mixed|array
+     */
+    public function by_index($data, $cond, $not_found_def = self::IGNORE){}
+</pre>
+
+<pre>
+    /**
+     * [ENG]Simple method, exclude specific index value from array
+     * @param array $data 
+     * [ENG]Input data
+     * @param array|string $cond 
+     * [ENG]Specific index string or array that would exclude. If it is string, use comma delimiter(,) between index
+     * @param bool $cond_flipped 
+     * [ENG]Param $cond has been processed with function array_flip? Default is false
+     * @return mixed|array
+     */
+    public function exclude_index($data, $cond, $cond_flipped = false){}
+</pre>
+
+<pre>
+    /**
+     * [ENG]Exclude or return specific index value from array by rule
+     * @param array $data 
+     * [ENG]Input data
+     * @param array|string $cond 
+     * [ENG]rules array or string. If it is string, use and delimiter(&) between rule.
+     * Format of each rule:
+     * [path to array, delimited by "/". If next path is circular array or want to match any name of index, use "*" instead]/(_return|_return_exclude)=xx,xx,xx,xx,xx
+     * @param mixed $not_found_def 
+     * [ENG](only valid in _return)What will do if index not exist in array? default is self::IGNORE
+     * @return mixed|array
+     */
+    public function by_rule($data, $cond, $not_found_def = self::IGNORE){}
+</pre>
+
+Example code can be found in file "example.php".
+
+
+中文说明
+======
+提取或排除数组内的数据（array_filter的补充版）
+
+目标：提供一个组件，能用在任意项目的数据交换处（比如api、函数或方法过滤返回），以统一的过滤规则、自由更改并返回定制数组的内容。
 
 
 致谢
@@ -24,7 +84,8 @@ php
      * 简单的获取某些索引
      * @param array $data 要过滤的数组
      * @param array|string $cond 只保留的索引键。如果是字符串，每个索引键必须使用半角逗号（,）。如果为空，将返回空数组
-     * @param mixed $not_found_def 索引键不存在时如何处理？
+     * @param mixed $not_found_def 索引键不存在时如何处理？默认为self::IGNORE
+     * @return mixed|array
      */
     public function by_index($data, $cond, $not_found_def = self::IGNORE){}
 </pre>

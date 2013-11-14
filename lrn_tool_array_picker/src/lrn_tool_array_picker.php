@@ -1,7 +1,12 @@
 <?php
 /**
+ * [ENG]
+ * Exclude or only return specific index value from an array
+ * (Supplement of function array_filter)
+ * 
+ * [CHS]
  * 提取或排除数组内的数据
- * 为array_filter的补充版
+ * 为函数array_filter的补充版
  * 
  * @author Horse Luke
  * @since 2013-11-14
@@ -10,17 +15,26 @@
 class lrn_tool_array_picker{
     
     /**
-     * 忽略，既不处理也不赋任何值（魔术字符）
+     * [ENG]Ignore, do not process or assign any value(magic code)
+     * [CHS]忽略，既不处理也不赋任何值（魔术字符）
      */
     const IGNORE = '__MAGIC_CODE_IGNORE_30!@%$71$^*&08__';
     
     protected $_rule_parse_cache = array();
     
     /**
-     * 简单的获取某些索引
-     * @param array $data 要过滤的数组
-     * @param array|string $cond 只保留的索引键。如果是字符串，每个索引键必须使用半角逗号（,）。如果为空，将返回空数组
-     * @param mixed $not_found_def 索引键不存在时如何处理？
+     * [ENG]Simple method, only return specific index value from array
+     * [CHS]简单的获取某些索引
+     * @param array $data 
+     * [ENG]Input data
+     * [CHS]要过滤的数组
+     * @param array|string $cond 
+     * [ENG]Specific index string or array that would return. If it is string, use comma delimiter between index
+     * [CHS]只保留的索引键。如果是字符串，每个索引键必须使用半角逗号（,）。如果为空，将返回空数组
+     * @param mixed $not_found_def 
+     * [ENG]What will do if index not exist in array? default is self::IGNORE
+     * [CHS]索引键不存在时如何处理？默认为self::IGNORE
+     * @return mixed|array
      */
     public function by_index($data, $cond, $not_found_def = self::IGNORE){
         if(!is_array($data) || empty($data)){
@@ -49,10 +63,17 @@ class lrn_tool_array_picker{
     }
     
     /**
-     * 简单的排除某些索引
-     * @param array $data 要过滤的数组
-     * @param array|string $cond 要剔除的索引键。如果是字符串，每个索引键必须使用半角逗号（,）。如果为空，将原样返回不做处理
-     * @param bool $cond_flipped $cond参数是否经过了预先array_flip？默认为false
+     * [ENG]Simple method, exclude specific index value from array
+     * [CHS]简单的排除某些索引
+     * @param array $data 
+     * [ENG]Input data
+     * [CHS]要过滤的数组
+     * @param array|string $cond 
+     * [ENG]Specific index string or array that would exclude. If it is string, use comma delimiter(,) between index
+     * [CHS]要剔除的索引键。如果是字符串，每个索引键必须使用半角逗号（,）。如果为空，将原样返回不做处理
+     * @param bool $cond_flipped 
+     * [ENG]Param $cond has been processed with function array_flip? Default is false
+     * [CHS]$cond参数是否经过了预先array_flip？默认为false
      * @return mixed|array
      */
     public function exclude_index($data, $cond, $cond_flipped = false){
@@ -68,11 +89,13 @@ class lrn_tool_array_picker{
         return array_diff_key($data, $cond_flipped ? $cond : array_flip($cond));
         
         /*
-        //另一种方法
+        //[ENG]another method
+        //[CHS]另一种方法
         $cond = $cond_flipped ? $cond : array_flip($cond);
         reset($data);
 
-        //reset已触发copy on write，此处用while是防止再次触发该机制
+        //[ENG]reset has been triggered copy on write, now use while for avoiding re-triggering
+        //[CHS]reset已触发copy on write，此处用while是防止再次触发该机制
         //http://horseluke-code.googlecode.com/svn/trunk/draftCode/for_foreach.php        
         while($row = each($data)) {
             if(isset($cond[$row[0]]) && isset($data[$row[0]])){
@@ -86,12 +109,21 @@ class lrn_tool_array_picker{
     }
     
     /**
-     * 根据某些规则获取某些索引值
-     * @param array $data 要过滤的数组
-     * @param array|string $cond 规则组合。如果不是数组，规则之间请使用半角&连接。
-     * 每条规则方法如下：
+     * [ENG]Exclude or return specific index value from array by rule
+     * [CHS]根据某些规则获取某些索引值
+     * @param array $data 
+     * [ENG]Input data
+     * [CHS]要过滤的数组
+     * @param array|string $cond 
+     * [ENG]rules array or string. If it is string, use and delimiter(&) between rule.
+     * Format of each rule:
+     * [path to array, delimited by "/". If next path is circular array or want to match any name of index, use "*" instead]/(_return|_return_exclude)=xx,xx,xx,xx,xx
+     * [CHS]规则组合。如果不是数组，规则之间请使用半角&连接。
+     * 每条规则格式如下：
      * [数组路径，索引名之间使用/分割。如果是循环数组、或匹配任意数组索引键，请使用*]/(_return|_return_exclude)=xx,xx,xx,xx,xx
-     * @param mixed $not_found_def (_return时才有效)索引键不存在时如何处理？
+     * @param mixed $not_found_def 
+     * [ENG](only valid in _return)What will do if index not exist in array? default is self::IGNORE
+     * [CHS](_return时才有效)索引键不存在时如何处理？
      * @return mixed|array
      */
     public function by_rule($data, $cond, $not_found_def = self::IGNORE){
@@ -127,6 +159,9 @@ class lrn_tool_array_picker{
     }
     
     /**
+     * [ENG]
+     * DO NOT USE THIS METHOD! It is a internal method for function array_walk, so has to be public!
+     * [CHS]
      * 根据某些规则获取某些索引值(正式过滤方法之array_walk递归)
      * 此方法仅供内部使用！因为使用array_walk而必须public而已。
      * @param &$value 要过滤的数据（array_walk走到的数组数据）
@@ -158,7 +193,8 @@ class lrn_tool_array_picker{
     }
 
     /**
-     * 解析一条规则
+     * [CHS]parse a rule
+     * [ENG]解析一条规则
      * @param string $cond
      * @return array|null
      */
