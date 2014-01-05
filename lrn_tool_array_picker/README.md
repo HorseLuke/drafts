@@ -1,18 +1,6 @@
 [draft]lrn_tool_array_picker
 ======
 
-<table class="" border="">
-<tbody><tr>
-<td><center><a href="http://www.phpclasses.org/" title="PHP Classes" alt="PHP Classes"><img src="http://files.phpclasses.org/graphics/phpclasses/logo-small-phpclasses.png" width="75" height="15" alt="PHP Classes" border="0"></a><br>
-<hr>
-<b><a href="http://www.phpclasses.org/package/8348-PHP-Filter-arrays-by-key-exclude-items-or-match-rules.html">Array Picker</a><br>
-By <a href="http://www.phpclasses.org/browse/author/640834.html">Horse Luke</a></b><br>
-<a href="http://www.phpclasses.org/award/innovation/"><img src="http://www.phpclasses.org/award/innovation/nominee.gif" width="89" height="89" alt="PHP Programming Innovation award nominee" title="PHP Programming Innovation award nominee" border="0"></a><br><font size="+1"><b>November&nbsp;2013<br>
-Number 8</b></font></center></td>
-</tr>
-</tbody></table>
-
-
 ENGLISH DESCRIPTION
 ======
 Exclude or only return specific index value from an array(Supplement of function array_filter).
