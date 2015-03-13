@@ -23,7 +23,16 @@ Web服务器反向代理googleapis到国内useso.com的配置文件
 
 4、如有需要请修改conf。注意：由于仅用于本地开发，故conf默认配置限制仅允许127.0.0.1的连接。
 
-5、重启nginx service，然后访问 https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js 测试。
+5、重启nginx service。
+
+6、在hosts中配置
+
+<pre>
+127.0.0.1   ajax.googleapis.com
+127.0.0.1   fonts.googleapis.com
+</pre>
+
+7、访问 https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js 测试。
 
 
 ## ssl本地证书生成方法 - CentOS
