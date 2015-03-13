@@ -9,12 +9,13 @@ Web服务器反向代理googleapis到国内useso.com的配置文件
 
 须确保/etc/nginx/nginx.conf存在如下类似包含代码：
 
-<pre>
+<code>
     # Load modular configuration files from the /etc/nginx/conf.d directory.
     # See http://nginx.org/en/docs/ngx_core_module.html#include
     # for more information.
     include /etc/nginx/conf.d/*.conf;
-</pre>
+    
+</code>
 
 然后将conf.d下的两个文件复制到文件夹/etc/nginx/conf.d/下，最后重启nginx service。
 
@@ -22,7 +23,7 @@ Web服务器反向代理googleapis到国内useso.com的配置文件
 
 ## ssl本地证书生成方法 - CentOS
 
-<pre>
+<code>
 sudo openssl genrsa -des3 -out server.key 1024
 (Enter pass phrase for server.key:xxxxx)
 
@@ -31,6 +32,6 @@ sudo openssl  req -new -key server.key -out server.csr
 sudo openssl rsa -in server.key  -out server_nopass.key
 
 sudo openssl x509 -req -days 3650 -in server.csr -signkey server_nopass.key -out server_nopass.crt
-</pre>
+</code>
 
 注意：chrome不允许添加自签名证书例外；firefox可以。
