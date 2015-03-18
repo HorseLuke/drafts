@@ -1,4 +1,5 @@
 name: horseluke
 version: 50
 handle:
-- rewrite: if (%{REQUEST_URI} ~ "generate_204") goto "/create_204.php"
+- rewrite: if (%{REQUEST_URI} == "/generate_204") goto "/create_204.php"
+
