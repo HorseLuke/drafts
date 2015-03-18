@@ -3,7 +3,7 @@
 
 ## 说明
 
-使用SAE（Sina App Engine，新浪云平台）生成HTTP 204返回码（generate_204），以解决Nexus 5等网络连接处出现感叹号问题。
+使用SAE（Sina App Engine，新浪云平台）生成HTTP 204返回码（generate_204），以解决Nexus 5等刷了Android 5.0之后、wifi等网络连接处出现感叹号问题。
 
 如果不想自建sae应用，请直接从第4部开始看。
 
@@ -22,11 +22,20 @@ version: 你自己的版本号
 
 然后将这些文件全部上传到该版本代码库。
 
-4、到adb执行su（也有说不用的，自己试试吧），然后再执行如下命令（如自建sae应用，请自行替换地址）：
+4、到adb执行如下命令（如自建sae应用，请自行替换地址）：
 
 <pre>
 settings put global captive_portal_server 50.horseluke.sinaapp.com
 </pre>
 
+（PS：根据朋友测试，目前暂时不用su）
+
+（PPS：如果不想在电脑执行adb、或电脑没有安装adb，可以在手机安装Android Terminal Emulator，然后运行命令。下载地址：http://www.coolapk.com/apk/jackpal.androidterm ）
+
 5、断开所有网络连接，再重连，感叹号消失
 
+## 其它信息
+
+有关该问题的分析、以及一键设置captive_portal_server apk工具（需root），请见小狐狸文章：https://xn--yet824cpd.xn--fiqs8s/45.html （Android 5.0新增isCaptivePortal()以判断wifi等移动网络连接状态原因）
+
+本代码博客说明见：http://www.iirr.info/blog/?p=1544
