@@ -101,6 +101,9 @@ End of Test.
 
 //(官方QA编译)http://windows.php.net/downloads/qa/php-7.0.0alpha2-nts-Win32-VC14-x64.zip
 
+//2015-06-25更新：alpha2逻辑有更新，分为Exception和Error，均实现了Throwable接口（interface）：https://bugs.php.net/bug.php?id=69929
+//故本文件在7.0.0alpha2无效
+
 ===============
 7.0.0alpha2
 ===============
