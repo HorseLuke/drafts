@@ -34,6 +34,8 @@ setcookie('esf_counter', $counter);
 <p>referer: <?=htmlspecialchars($referer);?></p>
 <p>a: <?=htmlspecialchars($a);?></p>
 <p>访问次数: <?=htmlspecialchars($counter);?></p>
+<p>访问ip: <?=htmlspecialchars($_SERVER['REMOTE_ADDR']);?></p>
+<p>http头 X_FORWARDED_FOR ip（有此头且第一个ip和上面的ip不一致，则表示被腾讯的云加速代理）: <?=htmlspecialchars(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : "无");?></p>
 
 <p>
 测试方法：<br />
@@ -41,15 +43,17 @@ setcookie('esf_counter', $counter);
 2. 再访问page_1或者page_2或者page_3（此步骤可选）<br />
 3. 然后访问page_rand_str<br />
 4. 最后访问index<br />
-5. 是不是很惊喜微信不给referer呢？（Chrome手机版测试正常）
+5. 是不是很惊喜微信/手机QQ不给referer呢？（Chrome手机版测试正常）
 </p>
 
 <p>
-微信的“QQ浏览器X5内核”居然还会有时候不给REFERER的Bug：<br />
-如果微信在访问新的页面（url参数不同就是一个新页面）后，再返回url没有参数的页面（典型的是首页），就会不给Referer。
+微信/手机QQ的“QQ浏览器X5内核”居然还会有时候不给REFERER的Bug：<br />
+如果微信/手机QQ在访问新的页面（url参数不同就是一个新页面）后，再返回url没有参数的页面（典型的是首页），就会不给Referer。
+<br />
+注意：此问题出在同域。
 </p>
 
-<p>last update: 2015-07-22</p>
+<p>last update: 2015-07-23</p>
 <p>源代码: <a href="https://github.com/HorseLuke/drafts/tree/master/bug_weixin_no_referer">https://github.com/HorseLuke/drafts/tree/master/bug_weixin_no_referer</a></p>
 </div>
 
