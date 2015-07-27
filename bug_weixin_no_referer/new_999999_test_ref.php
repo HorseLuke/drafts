@@ -9,7 +9,7 @@ setcookie('esf_counter', $counter);
 
 $currentUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $currentFileName = pathinfo(__FILE__, PATHINFO_BASENAME);
-$nextFileName = "new_999999_test_ref.php";
+$nextFileName = "test_ref.php";
 
 
 $paramATest = array(
