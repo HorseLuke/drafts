@@ -13,11 +13,14 @@ MySQL 5.5.22、MariaDB 5.5.41
 
 第一次输入
 
+```
 SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 0, 5;
+```
 
 第二次输入
-
+```
 SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 40, 5;
+```
 
 问题：
 
@@ -29,6 +32,7 @@ SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 40
 
 以下为测试SQL和结果：
 
+```
 mysql> SELECT version();
 +------------+
 | version()  |
@@ -61,3 +65,4 @@ mysql> SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC L
 1 row in set (0.00 sec)
 
 mysql>
+```
