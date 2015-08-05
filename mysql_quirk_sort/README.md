@@ -30,6 +30,8 @@ SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 40
 
 为什么content字段会意外影响sort排序，即使content字段不在任何一个索引中？
 
+为什么改成```ORDER BY `sort` DESC,  `id` DESC```又会正常？ 
+
 以下为测试SQL和结果：
 
 ```
