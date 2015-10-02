@@ -13,11 +13,14 @@ MySQL 5.5.22、MariaDB 5.5.41
 
 第一次输入
 
+```
 SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 0, 5;
+```
 
 第二次输入
-
+```
 SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 40, 5;
+```
 
 问题：
 
@@ -27,8 +30,11 @@ SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC LIMIT 40
 
 为什么content字段会意外影响sort排序，即使content字段不在任何一个索引中？
 
+为什么改成```ORDER BY `sort` DESC,  `id` DESC```又会正常？ 
+
 以下为测试SQL和结果：
 
+```
 mysql> SELECT version();
 +------------+
 | version()  |
@@ -61,3 +67,4 @@ mysql> SELECT * FROM `test_sort_table` WHERE `status` = 1 ORDER BY `sort` DESC L
 1 row in set (0.00 sec)
 
 mysql>
+```
