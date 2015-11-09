@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html manifest="N404.manifest">
+<head>
+    <meta charset="UTF-8" />
+    <title>CROS</title>
+	
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+
+	
+	
+</head>
+<body>
+  <h1>cros读取页</h1>
+  
+  <div id="info">运行中</div>
+  <div>上一个session数字：<span id="last_num">读取中</span></div>
+  <div>下一个session数字：<span id="next_num">读取中</span></div>
+  
+  <div><hr /><a href="user.html">点击刷新页面</a></div>
+  <div><hr /><hr /><hr /><a href="index.html">点击进入首页</a></div>
+	
+  <script>
+$.ajax({
+    type: "GET",
+    url: "http://localhost/test.php?rand=" + Math.random(),
+    data: {},
+    dataType: 'json',
+    xhrFields: {
+       withCredentials: true,    //如果要传递cookies等，withCredentials设置必须有且必须为true，此时服务器需同时发送Access-Control-Allow-Credentials: true
+    },
+    crossDomain: true,    //指定跨域
+    success: function(result){
+		$("#info").text("CROS运行成功");
+		$("#last_num").text(result.LAST_RANDOM_NUMBER_IN_SESSION);
+		$("#next_num").text(result.NEXT_RANDOM_NUMBER_IN_SESSION);
+    }
+});
+  </script>
+  
+</body>
+</html>
